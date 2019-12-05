@@ -20,10 +20,10 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
         public WeatherForecastController(ILogger<WeatherForecastController> logger)
         {
-            _logger = logger;
+            _logger = logger; // logger?
         }
 
-        [HttpGet]
+        [HttpGet] // returns a list of arrays on get request
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();
