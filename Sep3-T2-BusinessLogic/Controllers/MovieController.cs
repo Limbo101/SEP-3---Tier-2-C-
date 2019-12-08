@@ -13,10 +13,12 @@ namespace Sep3_T2_BusinessLogic.Controllers
     public class MovieController : ControllerBase
     {
         private Tier3Connection connection = new Tier3Connection();
-        [HttpPost]
-        public List<Movie> GetMovies(string Date)
+        [HttpGet]
+        public /*List<Movie>*/string GetMovies(string stuff)
         {
-            return connection.GetMovie(Date);
+            return $"value {stuff}";
+            //return connection.GetMovie(Date);
+            //return new List<Movie> { new Movie { Cinema = "Hello" }};
         } 
     }
 }
