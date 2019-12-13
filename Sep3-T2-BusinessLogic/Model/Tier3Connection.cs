@@ -17,16 +17,16 @@ namespace Sep3_T2_BusinessLogic.Model
         //}
 
         private TcpClient client;
-        private String ip;
+        private string ip;
         private int port;
-        public Tier3Connection(String ip, int port)
+        public Tier3Connection()
         {
             this.ip = "localhost";
             this.port = 3344;
             client = new TcpClient(ip, port);
         }
 
-        public void SendToServer(Package package)
+        public void RegisterToServer(Package package)
         {
 
             Boolean send = true;
@@ -36,12 +36,12 @@ namespace Sep3_T2_BusinessLogic.Model
                 send = true;
                 if (send == true)
                 {
-                    Console.WriteLine(package.operation);
+                    Console.WriteLine(package.action);
                     //sending
                     Console.WriteLine("Sending date!");
                     string message = JsonConvert.SerializeObject(package);
                     byte[] sendBytes = new byte[1024];
-                    sendBytes = Encoding.UTF8.GetBytes(message + "\r\0"); //  "\r\0" tells tcp java to stop reading the stream
+                    sendBytes = Encoding.UTF8.GetBytes(message + "\r\0"); // "\r\0" tells tcp java to stop reading the stream
                     stream.Write(sendBytes, 0, sendBytes.Length);
                     Console.WriteLine(message);
                     Console.WriteLine("Data has been sent!");
@@ -49,3 +49,7 @@ namespace Sep3_T2_BusinessLogic.Model
 
             }
         }
+    }
+}
+
+    
