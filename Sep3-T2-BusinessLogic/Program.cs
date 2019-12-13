@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Sep3_T2_BusinessLogic.Model;
 
 namespace Sep3_T2_BusinessLogic
 {

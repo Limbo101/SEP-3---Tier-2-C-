@@ -13,7 +13,8 @@ namespace Sep3_T2_BusinessLogic.Controllers
     [ApiController]
     public class MovieController : ControllerBase
     {
-        private Tier3Connection connection = new Tier3Connection();
+        private Tier3Connection connection = new Tier3Connection("localhost", 5598);
+
         [HttpGet]
         public /*List<Movie>*/ string GetMovies(string stuff)
         {
@@ -33,6 +34,7 @@ namespace Sep3_T2_BusinessLogic.Controllers
             confirmPassword = content[2];
             email = content[3];
             Console.WriteLine(username + " "+ password + " " + confirmPassword + " " + email );
+
             Console.WriteLine("Printed out");
             return "sup";
 
