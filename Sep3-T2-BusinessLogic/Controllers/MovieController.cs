@@ -21,15 +21,23 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
         [HttpPost]
         [Route("login")]
-        public string Login([FromBody] string[] content)
+        public async Task<IActionResult> Login([FromBody] string[] content)
         {
             Console.WriteLine("Received login data");
 
             Client client = new Client(content[0], content[1]);
 
-            Console.WriteLine($"{client.username} {client.password}");
+            string fromServ = "";
+                 
+            var data = JsonConvert.DeserializeObject(connection.GetFromServer(fromServ));
 
-            return "Everything gucci";
+            Client compClient = (Client)data;
+
+            if (client.username.Equals(compClient.username) && client.password.Equals(compClient.password))
+                return Ok();
+
+            return BadRequest("Password or username doesn't match");
+          
         }
 
         [HttpPost]
