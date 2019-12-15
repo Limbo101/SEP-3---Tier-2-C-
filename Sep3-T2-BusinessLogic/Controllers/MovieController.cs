@@ -20,6 +20,20 @@ namespace Sep3_T2_BusinessLogic.Controllers
         private Tier3Connection connection = new Tier3Connection();
 
         [HttpPost]
+        [Route("login")]
+        public string Login([FromBody] string[] content)
+        {
+            Console.WriteLine("Received login data");
+
+            Client client = new Client(content[0], content[1]);
+
+            Console.WriteLine($"{client.username} {client.password}");
+
+            return "Everything gucci";
+        }
+
+        [HttpPost]
+        [Route("register")]
         public async Task<IActionResult> Post([FromBody]string[] content)
         {
             Console.WriteLine("Received a Register post request.");
@@ -29,12 +43,24 @@ namespace Sep3_T2_BusinessLogic.Controllers
             confpas = content[2];
             email = content[3];
 
-            if (password.Equals(confpas))
+            foreach(char c in username)
+            {
+                if (c.Equals(" ") || c.Equals("@") || c.Equals(",") || c.Equals("."))
+                    return BadRequest("Forbidden characters are not allowed in username");
+            }
+
+            if (password.Equals(confpas) && password.Length > 4)
             {
                 SendClient(username, password, email);
                 return Ok("Everything is fine");
             }
-            return BadRequest("Passwords don't match");
+
+            if (!password.Equals(confpas) || password.Length < 4)
+            {
+                return BadRequest("Passwords don't match or the expected length is not met");
+            }
+
+            return null;
 
         }
 
@@ -63,9 +89,18 @@ namespace Sep3_T2_BusinessLogic.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostBooking([FromBody] string booking)
+        public async Task<IActionResult> PostBooking([FromBody]string[] content)
         {
+            Console.WriteLine("Received post request for booking");
+            string username, movieName, cinema, date;
+            username = content[0];
+            movieName = content[1];
+            cinema = content[2];
+            date = content[3];
 
+            SendBooking(username, movieName, cinema, date);
+
+            return Ok("Data sent");
         }
 
         public void SendClient(string username, string password, string email)
@@ -99,6 +134,15 @@ namespace Sep3_T2_BusinessLogic.Controllers
         public void SendBooking(string username, string MovieName, string Cinema, string date)
         {
             Booking book = new Booking(username, MovieName, Cinema, date);
+
+            Console.WriteLine("Sending data");
+
+            string pack = JsonConvert.SerializeObject(book);
+
+            Package package = new Package("Booking", pack);
+            connection.SendToServer(package);
+            Console.WriteLine(pack);
+            Console.WriteLine("Date has been sent");
         }
 
 
