@@ -19,6 +19,10 @@ namespace Sep3_T2_BusinessLogic.Model
         private TcpClient client;
         private string ip;
         private int port;
+
+        private static readonly Socket _clientSocket = new Socket
+        (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+
         public Tier3Connection()
         {
             this.ip = "localhost";
@@ -26,7 +30,22 @@ namespace Sep3_T2_BusinessLogic.Model
             client = new TcpClient(ip, port);
         }
 
-        public void RegisterToServer(Package package)
+        public string GetFromServer(string recv)
+        {
+            _clientSocket.Connect(ip, port);
+
+            byte[] buffer = new byte[2048];
+
+            int received = _clientSocket.Receive(buffer, SocketFlags.None);
+
+            var data = new byte[received];
+
+            recv = Encoding.UTF8.GetString(data);
+
+            return recv;
+        }
+
+        public void SendToServer(Package package)
         {
 
             Boolean send = true;
@@ -52,4 +71,4 @@ namespace Sep3_T2_BusinessLogic.Model
     }
 }
 
-    
+

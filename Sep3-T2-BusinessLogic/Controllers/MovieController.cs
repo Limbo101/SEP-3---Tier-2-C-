@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NUnit.Framework;
 using Sep3_T2_BusinessLogic.Model;
 
 namespace Sep3_T2_BusinessLogic.Controllers
@@ -17,14 +18,6 @@ namespace Sep3_T2_BusinessLogic.Controllers
     public class MovieController : ControllerBase
     {
         private Tier3Connection connection = new Tier3Connection();
-
-        [HttpGet]
-        public /*List<Movie>*/ string GetMovies(string stuff)
-        {
-            return $"value {stuff}";
-            //return connection.GetMovie(Date);
-            //return new List<Movie> { new Movie { Cinema = "Hello" }};
-        }
 
         [HttpPost]
         public async Task<IActionResult> Post([FromBody]string[] content)
@@ -45,6 +38,36 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
         }
 
+
+        [HttpGet("{date}")]
+        public async Task<List<Movie>> GetMovies([FromQuery] string date)
+        {
+            Console.WriteLine("Received a Schedule GET request");
+
+            SendDateOfMovies(date);
+
+            Console.WriteLine("Date sent");
+
+            var data = JsonConvert.DeserializeObject(connection.GetFromServer(date));
+
+            List<Movie> movies = (List<Movie>)data;
+
+            foreach(Movie movie in movies)
+            {
+                Console.WriteLine(movie);
+            }
+
+            return movies;
+
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> PostBooking([FromBody] string booking)
+        {
+
+        }
+
         public void SendClient(string username, string password, string email)
         {
             ClientReg client = new ClientReg();
@@ -52,16 +75,32 @@ namespace Sep3_T2_BusinessLogic.Controllers
             client.password = password;
             client.email = email;
 
-             ClientReg pack = new ClientReg(client.username, client.password, client.email);
-             Console.WriteLine("Sending date!");
+            ClientReg pack = new ClientReg(client.username, client.password, client.email);
+            Console.WriteLine("Sending date!");
 
-             string message = JsonConvert.SerializeObject(pack);
+            string message = JsonConvert.SerializeObject(pack);
 
             Package package = new Package("register", message);
-            connection.RegisterToServer(package);
-             Console.WriteLine(message);
-             Console.WriteLine("Date has been sent!");
+            connection.SendToServer(package);
+            Console.WriteLine(message);
+            Console.WriteLine("Date has been sent!");
 
         }
+
+        public void SendDateOfMovies(string date)
+        {
+            Console.WriteLine("Sending date!");
+
+            Package package = new Package("Date", date);
+            connection.SendToServer(package);
+
+        }
+
+        public void SendBooking(string username, string MovieName, string Cinema, string date)
+        {
+            Booking book = new Booking(username, MovieName, Cinema, date);
+        }
+
+
     }
 }
