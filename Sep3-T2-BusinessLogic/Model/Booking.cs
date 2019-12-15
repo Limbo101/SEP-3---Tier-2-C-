@@ -8,17 +8,17 @@ namespace Sep3_T2_BusinessLogic.Model
     [Serializable]
     public class Booking
     {
-        public string User { get; set; }
-        public string MovieName { get; set; }
-        public string Cinema { get; set; }
-        public string Date { get; set; }
+        public string username { get; set; }
+        public string title { get; set; }
+        public string date { get; set; }
+        public string hour { get; set; }
 
-        public Booking(string User, string MovieName, string cinema, string date)
+        public Booking(string User, string MovieName, string date, string hour)
         {
-            this.User = User;
-            this.MovieName = MovieName;
-            this.Cinema = cinema;
-            this.Date = date;
+            this.username = User;
+            this.title = MovieName;
+            this.date = date;
+            this.hour = hour;
         }
 
     }

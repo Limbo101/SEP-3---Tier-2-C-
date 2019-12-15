@@ -89,16 +89,17 @@ namespace Sep3_T2_BusinessLogic.Controllers
         }
 
         [HttpPost]
+        [Route("booking")]
         public async Task<IActionResult> PostBooking([FromBody]string[] content)
         {
             Console.WriteLine("Received post request for booking");
-            string username, movieName, cinema, date;
+            string username, movieName, date, hour;
             username = content[0];
             movieName = content[1];
-            cinema = content[2];
-            date = content[3];
+            date = content[2];
+            hour = content[3];
 
-            SendBooking(username, movieName, cinema, date);
+            SendBooking(username, movieName, date, hour);
 
             return Ok("Data sent");
         }
