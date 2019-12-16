@@ -51,6 +51,9 @@ namespace Sep3_T2_BusinessLogic.Controllers
             confpas = content[2];
             email = content[3];
 
+            if (username == null || password == null)
+                return BadRequest("Username or password cannot be empty");
+
             foreach(char c in username)
             {
                 if (c.Equals(" ") || c.Equals("@") || c.Equals(",") || c.Equals("."))

@@ -57,26 +57,20 @@ namespace Sep3_T2_BusinessLogic.Model
 
         public void SendToServer(Package package)
         {
-
-            Boolean send = true;
             NetworkStream stream = client.GetStream();
-            while (true)
-            {
-                send = true;
-                if (send == true)
-                {
-                    Console.WriteLine(package.action);
-                    //sending
-                    Console.WriteLine("Sending date!");
-                    string message = JsonConvert.SerializeObject(package);
-                    byte[] sendBytes = new byte[1024];
-                    sendBytes = Encoding.UTF8.GetBytes(message + "\r\0"); // "\r\0" tells tcp java to stop reading the stream
-                    stream.Write(sendBytes, 0, sendBytes.Length);
-                    Console.WriteLine(message);
-                    Console.WriteLine("Data has been sent!");
-                }
+           
+            Console.WriteLine(package.action);
+            //sending
+            Console.WriteLine("Sending date!");
+            string message = JsonConvert.SerializeObject(package);
+            byte[] sendBytes = new byte[1024];
+            sendBytes = Encoding.UTF8.GetBytes(message + "\r\0"); // "\r\0" tells tcp java to stop reading the stream
+            stream.Write(sendBytes, 0, sendBytes.Length);
+              Console.WriteLine(message);
+              Console.WriteLine("Data has been sent!");
+                
 
-            }
+
         }
     }
 }
