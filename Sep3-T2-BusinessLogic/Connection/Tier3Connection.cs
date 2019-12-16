@@ -1,7 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Nancy.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +13,6 @@ namespace Sep3_T2_BusinessLogic.Model
 {
     public class Tier3Connection
     {
-        //public List<Movie> GetMovie(string Date) 
-        //{
-        //    socket connection to tier 3 to receive details about movies from a specific date according to the movie class
-        //    return new List<Movie>(new Movie());
-        //}
 
         private TcpClient client;
         private string ip;
@@ -31,19 +29,31 @@ namespace Sep3_T2_BusinessLogic.Model
         }
 
         public string GetFromServer(string recv)
-        {
-            _clientSocket.Connect(ip, port);
+        { 
+                TcpClient client = new TcpClient("localhost", 3344);
 
-            byte[] buffer = new byte[2048];
+                NetworkStream stream = client.GetStream();
 
-            int received = _clientSocket.Receive(buffer, SocketFlags.None);
+                byte[] buffer = new byte[1024];
 
-            var data = new byte[received];
+                int bytes = stream.Read(buffer, 0, buffer.Length);
 
-            recv = Encoding.UTF8.GetString(data);
+                byte[] a = new byte[bytes];
 
-            return recv;
+                for (int i = 0; i < bytes; i++)
+                {
+                    a[i] = buffer[i];
+                }
+
+                recv = Encoding.UTF8.GetString(a);
+
+                Console.WriteLine(recv);
+
+                return recv;
+
         }
+        
+    
 
         public void SendToServer(Package package)
         {
