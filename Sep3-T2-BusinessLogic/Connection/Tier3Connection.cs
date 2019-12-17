@@ -1,4 +1,4 @@
-﻿using Nancy.Json;
+﻿
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Sockets;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,8 @@ namespace Sep3_T2_BusinessLogic.Model
         private string ip;
         private int port;
 
-        
+        private static readonly Socket _clientSocket = new Socket
+        (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
         public Tier3Connection()
         {
@@ -27,37 +29,42 @@ namespace Sep3_T2_BusinessLogic.Model
             client = new TcpClient(ip, port);
         }
 
-        public string GetFromServer(string recv)
-        { 
-                TcpClient client = new TcpClient("localhost", 3344);
+        public string GetFromServer()
+        {
+            NetworkStream stream = client.GetStream();
 
-                NetworkStream stream = client.GetStream();
+            byte[] buffer = new byte[1024];
 
-                byte[] buffer = new byte[1024];
+            int bytes = stream.Read(buffer, 0, buffer.Length);
 
-                int bytes = stream.Read(buffer, 0, buffer.Length);
+            byte[] a = new byte[bytes];
 
-                byte[] a = new byte[bytes];
+            for (int i = 0; i < bytes; i++)
+            {
+                a[i] = buffer[i];
+            }
 
-                for (int i = 0; i < bytes; i++)
-                {
-                    a[i] = buffer[i];
-                }
-                 Console.WriteLine(a.Length);
-                recv = Encoding.UTF8.GetString(a);
+            Console.WriteLine(Encoding.UTF8.GetString(a));
 
-                Console.WriteLine(recv);
+            string recv = Encoding.UTF8.GetString(a);
 
-                return recv;
+            Package package = JsonConvert.DeserializeObject<Package>(recv);
+
+            Console.WriteLine(package.action);
+
+            string toSendData = package.data;
+
+            return toSendData;
+
 
         }
-        
-    
+
+
 
         public void SendToServer(Package package)
         {
             NetworkStream stream = client.GetStream();
-           
+
             Console.WriteLine(package.action);
             //sending
             Console.WriteLine("Sending date!");
@@ -65,9 +72,9 @@ namespace Sep3_T2_BusinessLogic.Model
             byte[] sendBytes = new byte[1024];
             sendBytes = Encoding.UTF8.GetBytes(message + "\r\0"); // "\r\0" tells tcp java to stop reading the stream
             stream.Write(sendBytes, 0, sendBytes.Length);
-              Console.WriteLine(message);
-              Console.WriteLine("Data has been sent!");
-                
+            Console.WriteLine(message);
+            Console.WriteLine("Data has been sent!");
+
 
 
         }

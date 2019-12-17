@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,24 +22,24 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] string[] content)
-        {
-            Console.WriteLine("Received login data");
+        //public async Task<IActionResult> Login([FromBody] string[] content)
+        //{
+        //    Console.WriteLine("Received login data");
 
-            Client client = new Client(content[0], content[1]);
+        //    Client client = new Client(content[0], content[1]);
 
-            string fromServ = "";
-                 
-            var data = JsonConvert.DeserializeObject(connection.GetFromServer(fromServ));
+        //    string fromServ = "";
 
-            Client compClient = (Client)data;
+        //    var data = JsonConvert.DeserializeObject(connection.GetFromServer());
 
-            if (client.username.Equals(compClient.username) && client.password.Equals(compClient.password))
-                return Ok();
+        //    Client compClient = (Client)data;
 
-            return BadRequest("Password or username doesn't match");
-          
-        }
+        //    if (client.username.Equals(compClient.username) && client.password.Equals(compClient.password))
+        //        return Ok();
+
+        //    return BadRequest("Password or username doesn't match");
+
+        //}
 
         [HttpPost]
         [Route("register")]
@@ -54,7 +55,7 @@ namespace Sep3_T2_BusinessLogic.Controllers
             if (username == null || password == null)
                 return BadRequest("Username or password cannot be empty");
 
-            foreach(char c in username)
+            foreach (char c in username)
             {
                 if (c.Equals(" ") || c.Equals("@") || c.Equals(",") || c.Equals("."))
                     return BadRequest("Forbidden characters are not allowed in username");
@@ -77,7 +78,7 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
 
         [HttpGet("{date}")]
-        public async Task<List<Movie>> GetMovies([FromQuery] string date)
+        public async Task<string> GetMovies([FromQuery] string date)
         {
             Console.WriteLine("Received a Schedule GET request");
 
@@ -85,17 +86,9 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
             Console.WriteLine("Date sent");
 
-            var data = JsonConvert.DeserializeObject(connection.GetFromServer(date));
+            string value = connection.GetFromServer();
 
-            List<Movie> movies = (List<Movie>)data;
-
-            foreach(Movie movie in movies)
-            {
-                Console.WriteLine(movie);
-            }
-
-            return movies;
-
+            return value;
 
         }
 
