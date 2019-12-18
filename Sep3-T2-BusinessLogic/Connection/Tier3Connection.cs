@@ -18,10 +18,6 @@ namespace Sep3_T2_BusinessLogic.Model
         private TcpClient client;
         private string ip;
         private int port;
-
-        private static readonly Socket _clientSocket = new Socket
-        (AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-
         public Tier3Connection()
         {
             this.ip = "localhost";
