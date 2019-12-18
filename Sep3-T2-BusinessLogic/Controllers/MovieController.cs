@@ -28,6 +28,12 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
             Client client = new Client(content[0], content[1]);
 
+            string clientToSend = JsonConvert.SerializeObject(client);
+
+            Package pack = new Package("Login", clientToSend);
+
+            connection.SendToServer(pack);
+
             var data = JsonConvert.DeserializeObject<Client>(connection.GetFromServer());
 
             if (client.username.Equals(data.username) && client.password.Equals(data.password))
