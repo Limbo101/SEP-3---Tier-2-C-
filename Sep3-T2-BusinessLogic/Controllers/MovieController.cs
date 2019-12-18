@@ -22,24 +22,20 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
         [HttpPost]
         [Route("login")]
-        //public async Task<IActionResult> Login([FromBody] string[] content)
-        //{
-        //    Console.WriteLine("Received login data");
+        public async Task<IActionResult> Login([FromBody] string[] content)
+        {
+            Console.WriteLine("Received login data");
 
-        //    Client client = new Client(content[0], content[1]);
+            Client client = new Client(content[0], content[1]);
 
-        //    string fromServ = "";
+            var data = JsonConvert.DeserializeObject<Client>(connection.GetFromServer());
 
-        //    var data = JsonConvert.DeserializeObject(connection.GetFromServer());
+            if (client.username.Equals(data.username) && client.password.Equals(data.password))
+                return Ok();
 
-        //    Client compClient = (Client)data;
+            return BadRequest("Password or username doesn't match");
 
-        //    if (client.username.Equals(compClient.username) && client.password.Equals(compClient.password))
-        //        return Ok();
-
-        //    return BadRequest("Password or username doesn't match");
-
-        //}
+        }
 
         [HttpPost]
         [Route("register")]
