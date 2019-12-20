@@ -2841,11 +2841,12 @@
       ]
     },
     "System.Collections.NonGeneric/4.3.0": {
-      "sha512": "LE/oChpRvkSi3U25u0KnJcI44JeDZ1QJCyN4qFDx2uusEypdqR24w7lKYw21eYe5esuCBuc862wRmpF63Yy1KQ==",
+      "sha512": "prtjIEMhGUnQq6RnPEYLpFt8AtLbp9yq2zxOSrY7KJJZrw25Fi97IzBqY7iqssbM61Ek5b8f3MG/sG1N2sN5KA==",
       "type": "package",
       "path": "system.collections.nongeneric/4.3.0",
       "files": [
         ".nupkg.metadata",
+        ".signature.p7s",
         "ThirdPartyNotices.txt",
         "dotnet_library_license.txt",
         "lib/MonoAndroid10/_._",
@@ -5629,23 +5630,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Andrei\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\karol\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Sem 3\\Spring\\SEP-3---Tier-2-C-\\Sep3-T2-BusinessLogic\\Sep3-T2-BusinessLogic.csproj",
+      "projectUniqueName": "C:\\Users\\karol\\Desktop\\important stuff\\SEP exams\\SEP 3\\Tier 1 - Client\\SEP-3---Tier-2-C-\\Sep3-T2-BusinessLogic\\Sep3-T2-BusinessLogic.csproj",
       "projectName": "Sep3-T2-BusinessLogic",
-      "projectPath": "D:\\Sem 3\\Spring\\SEP-3---Tier-2-C-\\Sep3-T2-BusinessLogic\\Sep3-T2-BusinessLogic.csproj",
-      "packagesPath": "C:\\Users\\Andrei\\.nuget\\packages\\",
-      "outputPath": "D:\\Sem 3\\Spring\\SEP-3---Tier-2-C-\\Sep3-T2-BusinessLogic\\obj\\",
+      "projectPath": "C:\\Users\\karol\\Desktop\\important stuff\\SEP exams\\SEP 3\\Tier 1 - Client\\SEP-3---Tier-2-C-\\Sep3-T2-BusinessLogic\\Sep3-T2-BusinessLogic.csproj",
+      "packagesPath": "C:\\Users\\karol\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\karol\\Desktop\\important stuff\\SEP exams\\SEP 3\\Tier 1 - Client\\SEP-3---Tier-2-C-\\Sep3-T2-BusinessLogic\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\Andrei\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\karol\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -5696,16 +5693,6 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[3.0.1, 3.0.1]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.win-x64",
-            "version": "[3.0.1, 3.0.1]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.AspNetCore.App": {
             "privateAssets": "none"
@@ -5714,7 +5701,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }

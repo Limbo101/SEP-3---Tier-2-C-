@@ -22,7 +22,7 @@ namespace Sep3_T2_BusinessLogic.Controllers
 
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] string[] content)
+        public async Task<String> Login([FromBody] string[] content)
         {
             Console.WriteLine("Received login data");
 
@@ -33,13 +33,20 @@ namespace Sep3_T2_BusinessLogic.Controllers
             Package pack = new Package("Login", clientToSend);
 
             connection.SendToServer(pack);
-
-            var data = JsonConvert.DeserializeObject<Client>(connection.GetFromServer());
+            var received = connection.GetLoginFromServer();
+            Console.WriteLine(received);
+            var data = JsonConvert.DeserializeObject<Client>(received); //
 
             if (client.username.Equals(data.username) && client.password.Equals(data.password))
-                return Ok();
+            {
+                Console.WriteLine("OK!!!!!");
+                // return JsonConvert.SerializeObject(Ok());
+                return JsonConvert.SerializeObject("OK");
+            }
 
-            return BadRequest("Password or username doesn't match");
+            Console.WriteLine("NOT OK!!!!!");
+            // return JsonConvert.SerializeObject(BadRequest("Password or username doesn't match"));
+            return JsonConvert.SerializeObject("NOT OK");
 
         }
 

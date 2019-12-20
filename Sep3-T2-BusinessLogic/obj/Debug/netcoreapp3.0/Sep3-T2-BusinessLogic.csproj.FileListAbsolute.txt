@@ -371,3 +371,8 @@ C:\Users\catal\Documents\GitHub\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\obj\Debu
 C:\Users\catal\Documents\GitHub\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\obj\Debug\netcoreapp3.0\Sep3-T2-BusinessLogic.csproj.CopyComplete
 C:\Users\catal\Documents\GitHub\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\obj\Debug\netcoreapp3.0\Sep3-T2-BusinessLogic.dll
 C:\Users\catal\Documents\GitHub\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\obj\Debug\netcoreapp3.0\Sep3-T2-BusinessLogic.pdb
+C:\Users\karol\Desktop\important stuff\SEP exams\SEP 3\Tier 1 - Client\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\bin\Debug\netcoreapp3.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\karol\Desktop\important stuff\SEP exams\SEP 3\Tier 1 - Client\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\bin\Debug\netcoreapp3.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\karol\Desktop\important stuff\SEP exams\SEP 3\Tier 1 - Client\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\bin\Debug\netcoreapp3.0\Microsoft.Extensions.PlatformAbstractions.dll
+C:\Users\karol\Desktop\important stuff\SEP exams\SEP 3\Tier 1 - Client\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\bin\Debug\netcoreapp3.0\Nancy.dll
+C:\Users\karol\Desktop\important stuff\SEP exams\SEP 3\Tier 1 - Client\SEP-3---Tier-2-C-\Sep3-T2-BusinessLogic\bin\Debug\netcoreapp3.0\nunit.framework.dll
